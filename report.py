@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pdfkit
 from jinja2 import Environment, FileSystemLoader
+import os
 
 
 class Report:
@@ -116,6 +117,7 @@ class Report:
     def generate_pdf(self):
         env = Environment(loader=FileSystemLoader('.'))
         template = env.get_template("pdf_template.html")
+        image_path = os.path.abspath('graph.png')
 
         years_statistics_trs = self.create_html_years_statistics_trs()
         cities_salary_statistics_trs = self.create_html_cities_statistics_trs(
@@ -126,7 +128,8 @@ class Report:
         pdf_template = template.render({'selected_vacancy': self.__statistic.selected_vacancy,
                                         'year_statistics_trs': years_statistics_trs,
                                         'city_salary_statistics_trs': cities_salary_statistics_trs,
-                                        'city_vacancy_statistics_trs': cities_vacancy_num_statistics_trs})
+                                        'city_vacancy_statistics_trs': cities_vacancy_num_statistics_trs,
+                                        'image_path': image_path})
         config = pdfkit.configuration(wkhtmltopdf=r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe')
         pdfkit.from_string(pdf_template, 'report.pdf', configuration=config, options={"enable-local-file-access": True})
 

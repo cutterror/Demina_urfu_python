@@ -2,3 +2,6 @@
 /venv
 /vacancies.csv
 /vacancies_by_year.csv
+/vacancies_big.csv
+/__pycache__
+/vacancies_medium.csv

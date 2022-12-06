@@ -13,7 +13,7 @@ def check_statistics_preparedness(method):
 
 
 class Statistic:
-    def __init__(self, selected_vacancy: str):
+    def __init__(self, selected_vacancy: str, data):
         self.__selected_vacancy = selected_vacancy
         self.__vacancies_count = 0
         self.__cities = {}
@@ -26,6 +26,7 @@ class Statistic:
         self.__city_salary_dynamics = {}
         self.__city_num_vacancies_dynamics = {}
 
+        self.enter_static_data(data)
         self.fulfillment = False
 
     @property
