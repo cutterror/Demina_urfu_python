@@ -5,6 +5,12 @@ from table import Table
 
 
 def print_statistics_report(vacancy_data: list):
+    """Выводит необходимую по заданию статистику и генерирует с ней же файлы
+
+    Args:
+        vacancy_data (list): Список словарей с вакансиями для статистики
+    """
+
     profession_name = input("Введите название профессии: ")
     statistic = Statistic(profession_name, vacancy_data)
     statistic.print_statistics()
@@ -15,6 +21,11 @@ def print_statistics_report(vacancy_data: list):
 
 
 def print_vacancy_table(vacancy_data: list):
+    """Выводит таблицу с вакансиями с необходимыми параметрами
+
+    Args:
+        vacancy_data (list): Список словарей с вакансиями для статистики
+    """
     table = Table(vacancy_data,
                   {'need_filter': input(" Введите параметр фильтрации: "),
                    'sort_option': input(" Введите параметр сортировки: "),
@@ -23,6 +34,8 @@ def print_vacancy_table(vacancy_data: list):
                    'need_columns': input(" Введите требуемые столбцы: ")})
     table.print_vacancies_table()
 
+
+"""Интерфейс для взаимодействия пользователя с вышеобъявленными методами"""
 
 file_name = input('Введите название файла: ')
 data = DataSet(file_name).data
