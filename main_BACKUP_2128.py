@@ -26,7 +26,11 @@ def print_vacancy_table(vacancy_data: list):
 
 file_name = input('Введите название файла: ')
 data = DataSet(file_name).data
-output_settings = input('Вакансии или Статистика? ').lower()
+<<<<<<< HEAD
+output_settings = input('Вакансии или статистика? ').lower()
+=======
+output_settings = input('Статистика или Вакансии? ').lower()
+>>>>>>> 8d5f44e419438e19750243a8caf60f318374f796
 if output_settings == 'вакансии':
     print_vacancy_table(data)
 elif output_settings == 'статистика':
