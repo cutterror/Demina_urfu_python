@@ -15,6 +15,11 @@ class DataSet:
 
         Args::
             file_name (str): Имя файла для считывания
+
+        >>> type(DataSet('vacancies.csv')).__name__
+        'DataSet'
+        >>> DataSet('vacancies.csv').titles
+        ['name', 'description', 'key_skills', 'experience_id', 'premium', 'employer_name', 'salary_from', 'salary_to', 'salary_gross', 'salary_currency', 'area_name', 'published_at']
         """
 
         self.__file = open(file_name, 'r', encoding='utf-8-sig')

@@ -33,6 +33,9 @@ class Report:
 
         Args:
             statistic (Statistic): Статистика для формирования отчётов
+
+        >>> type(Report(Statistic('Программист', [{'name': 'Программист', 'description': 'Уровень ЗП обсуждается индивидуально', 'key_skills': 'Организаторские навыки', 'experience_id': 'between3And6', 'premium': 'FALSE', 'employer_name': 'ПМЦ Авангард', 'salary_from': '80000', 'salary_to': '100000', 'salary_gross': 'FALSE', 'salary_currency': 'RUR', 'area_name': 'Санкт-Петербург', 'published_at': '2022-07-17T18:23:06+0300'}]))).__name__
+        'Report'
         """
 
         self.__statistic = statistic

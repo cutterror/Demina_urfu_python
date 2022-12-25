@@ -45,6 +45,25 @@ class Statistic:
         Args:
             selected_vacancy (str): Выбранное название вакансии для дополнительной статистики
             data (list): Список словарей с вакансиями
+
+        >>> type(Statistic('Программист', [{'name': 'Программист', 'description': 'Уровень ЗП обсуждается индивидуально', 'key_skills': 'Организаторские навыки', 'experience_id': 'between3And6', 'premium': 'FALSE', 'employer_name': 'ПМЦ Авангард', 'salary_from': '80000', 'salary_to': '100000', 'salary_gross': 'FALSE', 'salary_currency': 'RUR', 'area_name': 'Санкт-Петербург', 'published_at': '2022-07-17T18:23:06+0300'}])).__name__
+        'Statistic'
+        >>> Statistic('Программист', [{'name': 'Программист', 'description': 'Уровень ЗП обсуждается индивидуально', 'key_skills': 'Организаторские навыки', 'experience_id': 'between3And6', 'premium': 'FALSE', 'employer_name': 'ПМЦ Авангард', 'salary_from': '80000', 'salary_to': '100000', 'salary_gross': 'FALSE', 'salary_currency': 'RUR', 'area_name': 'Санкт-Петербург', 'published_at': '2022-07-17T18:23:06+0300'}]).salary_dynamics
+        {2022: 90000}
+        >>> Statistic('Программист', [{'name': 'Программист', 'description': 'Уровень ЗП обсуждается индивидуально', 'key_skills': 'Организаторские навыки', 'experience_id': 'between3And6', 'premium': 'FALSE', 'employer_name': 'ПМЦ Авангард', 'salary_from': '80000', 'salary_to': '100000', 'salary_gross': 'FALSE', 'salary_currency': 'RUR', 'area_name': 'Санкт-Петербург', 'published_at': '2022-07-17T18:23:06+0300'}]).num_vacancies_dynamics
+        {2022: 1}
+        >>> Statistic('Программист', [{'name': 'Программист', 'description': 'Уровень ЗП обсуждается индивидуально', 'key_skills': 'Организаторские навыки', 'experience_id': 'between3And6', 'premium': 'FALSE', 'employer_name': 'ПМЦ Авангард', 'salary_from': '80000', 'salary_to': '100000', 'salary_gross': 'FALSE', 'salary_currency': 'RUR', 'area_name': 'Санкт-Петербург', 'published_at': '2022-07-17T18:23:06+0300'}]).selected_salary_dynamics
+        {2022: 90000}
+        >>> Statistic('Программист', [{'name': 'Программист', 'description': 'Уровень ЗП обсуждается индивидуально', 'key_skills': 'Организаторские навыки', 'experience_id': 'between3And6', 'premium': 'FALSE', 'employer_name': 'ПМЦ Авангард', 'salary_from': '80000', 'salary_to': '100000', 'salary_gross': 'FALSE', 'salary_currency': 'RUR', 'area_name': 'Санкт-Петербург', 'published_at': '2022-07-17T18:23:06+0300'}]).selected_num_vacancies_dynamics
+        {2022: 1}
+        >>> Statistic('Программист', [{'name': 'Программист', 'description': 'Уровень ЗП обсуждается индивидуально', 'key_skills': 'Организаторские навыки', 'experience_id': 'between3And6', 'premium': 'FALSE', 'employer_name': 'ПМЦ Авангард', 'salary_from': '80000', 'salary_to': '100000', 'salary_gross': 'FALSE', 'salary_currency': 'RUR', 'area_name': 'Санкт-Петербург', 'published_at': '2022-07-17T18:23:06+0300'}]).city_salary_dynamics
+        {'Санкт-Петербург': 90000}
+        >>> Statistic('Программист', [{'name': 'Программист', 'description': 'Уровень ЗП обсуждается индивидуально', 'key_skills': 'Организаторские навыки', 'experience_id': 'between3And6', 'premium': 'FALSE', 'employer_name': 'ПМЦ Авангард', 'salary_from': '80000', 'salary_to': '100000', 'salary_gross': 'FALSE', 'salary_currency': 'RUR', 'area_name': 'Санкт-Петербург', 'published_at': '2022-07-17T18:23:06+0300'}]).city_num_vacancies_dynamics
+        {'Санкт-Петербург': 1.0}
+        >>> Statistic('Программист', [{'name': 'Программист', 'description': 'Уровень ЗП обсуждается индивидуально', 'key_skills': 'Организаторские навыки', 'experience_id': 'between3And6', 'premium': 'FALSE', 'employer_name': 'ПМЦ Авангард', 'salary_from': '80000', 'salary_to': '100000', 'salary_gross': 'FALSE', 'salary_currency': 'RUR', 'area_name': 'Санкт-Петербург', 'published_at': '2022-07-17T18:23:06+0300'}]).selected_vacancy
+        'Программист'
+        >>> Statistic('Программист', [{'name': 'Программист', 'description': 'Уровень ЗП обсуждается индивидуально', 'key_skills': 'Организаторские навыки', 'experience_id': 'between3And6', 'premium': 'FALSE', 'employer_name': 'ПМЦ Авангард', 'salary_from': '80000', 'salary_to': '100000', 'salary_gross': 'FALSE', 'salary_currency': 'RUR', 'area_name': 'Санкт-Петербург', 'published_at': '2022-07-17T18:23:06+0300'}]).fulfillment
+        False
         """
 
         self.__selected_vacancy = selected_vacancy

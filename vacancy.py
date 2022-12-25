@@ -20,6 +20,17 @@ class Vacancy:
 
         Attributes:
             row_dict (dict): Словарь, по значениям которого с соответсвующими ключами будет иницализирован Vacancy
+
+        >>> type(Vacancy({'name': 'Программист', 'area_name': 'Екатеринбург', 'published_at':'2015', 'salary_from': '7000', 'salary_to': '90000', 'salary_currency': 'RUR'})).__name__
+        'Vacancy'
+        >>> Vacancy({'name': 'Программист', 'area_name': 'Екатеринбург', 'published_at':'2015', 'salary_from': '7000', 'salary_to': '90000', 'salary_currency': 'RUR'}).name
+        'Программист'
+        >>> Vacancy({'name': 'Программист', 'area_name': 'Екатеринбург', 'published_at':'2015', 'salary_from': '7000', 'salary_to': '90000', 'salary_currency': 'RUR'}).area_name
+        'Екатеринбург'
+        >>> Vacancy({'name': 'Программист', 'area_name': 'Екатеринбург', 'published_at':'2015', 'salary_from': '7000', 'salary_to': '90000', 'salary_currency': 'RUR'}).year
+        2015
+        >>> Vacancy({'name': 'Программист', 'area_name': 'Екатеринбург', 'published_at':'2015', 'salary_from': '7000', 'salary_to': '90000', 'salary_currency': 'RUR'}).average_salary
+        48500.0
         """
 
         self.__name = row_dict['name']

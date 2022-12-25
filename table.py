@@ -7,8 +7,13 @@ def format_time(time: str):
 
     Attributes:
         time (str): Время публикации для форматирования
+
+    >>> format_time('2014-07-30')
+    '30.07.2014'
     """
 
+    if len(time) < 10:
+        raise Exception('Недостаточная длина строки для форматирования')
     return time[8:10] + '.' + time[5:7] + '.' + time[:4]
 
 
@@ -17,6 +22,13 @@ def format_money(money: str):
 
     Attributes:
         money (str): Сумма оклада
+
+    >>> format_money('4080')
+    '4 080'
+    >>> format_money('4')
+    '4'
+    >>> format_money('4500000.0')
+    '4 500 000'
     """
 
     str_without_dot = money[:money.find('.')] if '.' in money else money
@@ -71,6 +83,15 @@ class Table:
         Attributes:
             data (list): Список словарей с данными о вакансиях
             settings (dict): Словарь с настройками вывода таблицы
+
+        >>> type(Table([{'name': 'Руководитель', 'description': 'испытательный срок до 3 месяцев', 'key_skills': 'Организаторские навыки', 'experience_id': 'between3And6', 'premium': 'FALSE', 'employer_name': 'ПМЦ Авангард', 'salary_from': '80000', 'salary_to': '100000', 'salary_gross': 'FALSE', 'salary_currency': 'RUR', 'area_name': 'Санкт-Петербург', 'published_at': '2022-07-17T18:23:06+0300'}], {'need_filter': '', 'sort_option': '', 'is_reverse_sort': '', 'need_rows': '', 'need_columns': ''})).__name__
+        'Table'
+        >>> Table([{'name': 'Руководитель', 'description': 'испытательный срок до 3 месяцев', 'key_skills': 'Организаторские навыки', 'experience_id': 'between3And6', 'premium': 'FALSE', 'employer_name': 'ПМЦ Авангард', 'salary_from': '80000', 'salary_to': '100000', 'salary_gross': 'FALSE', 'salary_currency': 'RUR', 'area_name': 'Санкт-Петербург', 'published_at': '2022-07-17T18:23:06+0300'}], {'need_filter': 'Название: Руководитель', 'sort_option': '', 'is_reverse_sort': '', 'need_rows': '', 'need_columns': ''}).filter
+        ('Название', 'Руководитель')
+        >>> Table([{'name': 'Руководитель', 'description': 'испытательный срок до 3 месяцев', 'key_skills': 'Организаторские навыки', 'experience_id': 'between3And6', 'premium': 'FALSE', 'employer_name': 'ПМЦ Авангард', 'salary_from': '80000', 'salary_to': '100000', 'salary_gross': 'FALSE', 'salary_currency': 'RUR', 'area_name': 'Санкт-Петербург', 'published_at': '2022-07-17T18:23:06+0300'}], {'need_filter': '', 'sort_option': 'Опыт работы', 'is_reverse_sort': '', 'need_rows': '', 'need_columns': ''}).sort_option
+        'Опыт работы'
+        >>> Table([{'name': 'Руководитель', 'description': 'испытательный срок до 3 месяцев', 'key_skills': 'Организаторские навыки', 'experience_id': 'between3And6', 'premium': 'FALSE', 'employer_name': 'ПМЦ Авангард', 'salary_from': '80000', 'salary_to': '100000', 'salary_gross': 'FALSE', 'salary_currency': 'RUR', 'area_name': 'Санкт-Петербург', 'published_at': '2022-07-17T18:23:06+0300'}], {'need_filter': '', 'sort_option': '', 'is_reverse_sort': 'Да', 'need_rows': '', 'need_columns': ''}).is_reverse_sort
+        True
         """
         self.vacancies_data = self.translate_and_clear_data(data)
         self.settings = settings
@@ -137,6 +158,9 @@ class Table:
         Attributes:
             money (str): Сумма оклада
             salary_currency (str): Валюта оклада
+
+        >>> Table([{'name': 'Руководитель', 'description': 'испытательный срок до 3 месяцев', 'key_skills': 'Организаторские навыки', 'experience_id': 'between3And6', 'premium': 'FALSE', 'employer_name': 'ПМЦ Авангард', 'salary_from': '80000', 'salary_to': '100000', 'salary_gross': 'FALSE', 'salary_currency': 'RUR', 'area_name': 'Санкт-Петербург', 'published_at': '2022-07-17T18:23:06+0300'}], {'need_filter': '', 'sort_option': '', 'is_reverse_sort': 'Да', 'need_rows': '', 'need_columns': ''}).convert('600', 'Гривны')
+        983.9999999999999
         """
 
         return float(money) * self.currency_to_rub[salary_currency]
@@ -255,7 +279,13 @@ class Table:
             self.table.add_row([i + 1] + [value for value in row.values()])
 
     def translate_and_clean_string(self, string: str):
-        """Очищает строку от html-хэштегов и переводит, если это возможно"""
+        """Очищает строку от html-хэштегов и переводит, если это возможно
+
+        >>> Table([{'name': 'Руководитель', 'description': 'испытательный срок до 3 месяцев', 'key_skills': 'Организаторские навыки', 'experience_id': 'between3And6', 'premium': 'FALSE', 'employer_name': 'ПМЦ Авангард', 'salary_from': '80000', 'salary_to': '100000', 'salary_gross': 'FALSE', 'salary_currency': 'RUR', 'area_name': 'Санкт-Петербург', 'published_at': '2022-07-17T18:23:06+0300'}], {'need_filter': '', 'sort_option': '', 'is_reverse_sort': 'Да', 'need_rows': '', 'need_columns': ''}).translate_and_clean_string('<p>Jojo</p>')
+        'Jojo'
+        >>> Table([{'name': 'Руководитель', 'description': 'испытательный срок до 3 месяцев', 'key_skills': 'Организаторские навыки', 'experience_id': 'between3And6', 'premium': 'FALSE', 'employer_name': 'ПМЦ Авангард', 'salary_from': '80000', 'salary_to': '100000', 'salary_gross': 'FALSE', 'salary_currency': 'RUR', 'area_name': 'Санкт-Петербург', 'published_at': '2022-07-17T18:23:06+0300'}], {'need_filter': '', 'sort_option': '', 'is_reverse_sort': 'Да', 'need_rows': '', 'need_columns': ''}).translate_and_clean_string('<p>name</p>')
+        'Название'
+        """
 
         result = re.sub(re.compile('<.*?>'), '', string).split("\n")
         result = [" ".join(value.strip().split()) for value in result]

@@ -16,6 +16,13 @@ class City:
 
         Args:
             vacancy (Vacancy): Объект Vacancy по свойствам которого будет инициализоран City
+
+        >>> type(City(Vacancy({'name': 'Программист', 'area_name': 'Екатеринбург', 'published_at':'2015', 'salary_from': '7000', 'salary_to': '90000', 'salary_currency': 'RUR'}))).__name__
+        'City'
+        >>> City(Vacancy({'name': 'Программист', 'area_name': 'Екатеринбург', 'published_at':'2015', 'salary_from': '7000', 'salary_to': '90000', 'salary_currency': 'RUR'})).average_salary
+        48500.0
+        >>> City(Vacancy({'name': 'Программист', 'area_name': 'Екатеринбург', 'published_at':'2015', 'salary_from': '7000', 'salary_to': '90000', 'salary_currency': 'RUR'})).vacancy_count
+        1
         """
 
         self.__name = vacancy.area_name
