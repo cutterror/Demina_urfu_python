@@ -8,13 +8,15 @@ def format_time(time: str):
     Attributes:
         time (str): Время публикации для форматирования
 
-    >>> format_time('2014-07-30')
-    '30.07.2014'
+    >>> format_time('2014-12-30')
+    '30.12.2014'
+    >>> format_time('2022-12-17T18:23:06+0300')
+    '17.12.2022'
     """
 
     if len(time) < 10:
         raise Exception('Недостаточная длина строки для форматирования')
-    return time[8:10] + '.' + time[5:7] + '.' + time[:4]
+    return f'{time[8:10]}.{time[5:7]}.{time[:4]}'
 
 
 def format_money(money: str):
@@ -235,8 +237,9 @@ class Table:
         elif self.sort_option == "Опыт работы":
             self.vacancies_data = sorted(self.vacancies_data, key=lambda x: self.experience_weight[x["Опыт работы"]],
                                          reverse=self.is_reverse_sort)
-        self.vacancies_data = sorted(self.vacancies_data, key=lambda x: x[self.sort_option],
-                                     reverse=self.is_reverse_sort)
+        else:
+            self.vacancies_data = sorted(self.vacancies_data, key=lambda x: x[self.sort_option],
+                                         reverse=self.is_reverse_sort)
 
     def filter_vacancies(self):
         """Фильтрует данные о вакансиях по указанному параметру фильтрации"""
@@ -269,10 +272,10 @@ class Table:
     def fill_table(self):
         """Заполняет таблицу данными, обрезая строки, если они длиннее 100 символов"""
 
+        self.create_titles()
         self.table.max_width = 20
         self.table.hrules = True
         self.table.align = 'l'
-        self.create_titles()
         for i, row in enumerate(self.vacancies_data):
             for key, value in row.items():
                 row[key] = f"{value[:100]}..." if len(value) > 100 else value
