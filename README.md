@@ -1,5 +1,9 @@
 # Demina_urfu_python
 
+### Separation csv-file
+
+![doctests](https://github.com/cutterror/Demina_urfu_python/blob/main/file_screenshots/1.png)
+
 ### Profiling
 
 Для анализа времязатратности функций вызываю их 100 000 раз.
