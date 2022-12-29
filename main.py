@@ -2,6 +2,7 @@ from dataset import DataSet
 from report import Report
 from statistic import Statistic
 from table import Table
+from csvsplit import CsvSplitterByYear
 
 
 def print_statistics_report(vacancy_data: list):
@@ -37,12 +38,15 @@ def print_vacancy_table(vacancy_data: list):
 
 """Интерфейс для взаимодействия пользователя с вышеобъявленными методами"""
 
-file_name = input('Введите название файла: ')
-data = DataSet(file_name).data
-output_settings = input('Вакансии или Статистика? ').lower()
-if output_settings == 'вакансии':
-    print_vacancy_table(data)
-elif output_settings == 'статистика':
-    print_statistics_report(data)
-else:
-    raise Exception('Неверно введён праметр вывода')
+# file_name = input('Введите название файла: ')
+# data = DataSet(file_name).data
+# output_settings = input('Вакансии или Статистика? ').lower()
+# if output_settings == 'вакансии':
+#     print_vacancy_table(data)
+# elif output_settings == 'статистика':
+#     print_statistics_report(data)
+# else:
+#     raise Exception('Неверно введён праметр вывода')
+
+file_name = 'vacancies_by_year.csv'
+splitCsv = CsvSplitterByYear(file_name, 'vacancies_by_year')

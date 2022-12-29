@@ -29,7 +29,7 @@ class DataSet:
 
     @property
     def data(self):
-        """Возвращает значение приватного поля со списком словарей"""
+        """Возвращает значение приватного поля с reader"""
 
         return self.__data
 
@@ -42,5 +42,5 @@ class DataSet:
     def glue_row_dictionaries(self):
         """Объединяет заголовки со считанной из файла информацией, формируя словари, где заголовки - ключи"""
 
-        self.__data = filter(lambda row: len(row) == len(self.__titles) and "" not in row, self.data)
-        self.__data = list(dict(zip(self.__titles, row)) for row in self.data)
+        self.__data = filter(lambda row: len(row) == len(self.__titles) and "" not in row, self.__data)
+        self.__data = list(dict(zip(self.__titles, row)) for row in self.__data)
